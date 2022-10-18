@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ServiceTests\**" />
+    <EmbeddedResource Remove="ServiceTests\**" />
+    <None Remove="ServiceTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.7.0" />
 	<PackageReference Include="Moq" Version="4.17.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
@@ -20,10 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuperheroAPI\SuperheroAPI.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ServiceTests\" />
   </ItemGroup>
 
 </Project>

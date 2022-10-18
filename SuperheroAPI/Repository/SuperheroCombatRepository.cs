@@ -11,7 +11,7 @@ namespace SuperheroAPI.Repository
         {
             return contestantsList;
         }
-        public List<Contestant> GetPowerstats(string name)
+        public List<Contestant> GetAllNamed(string name)
         {
             return contestantsList;
         }

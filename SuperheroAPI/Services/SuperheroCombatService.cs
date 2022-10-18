@@ -8,9 +8,9 @@ namespace SuperheroAPI.Services
         private readonly SuperheroCombatRepository _repository;
         private readonly CombatHandler _combatHandler;
 
-        public SuperheroCombatService(SuperheroCombatRepository repository)
+        public SuperheroCombatService()
         {
-            _repository = repository;
+            _repository = new();
             _combatHandler = new();
         }
 

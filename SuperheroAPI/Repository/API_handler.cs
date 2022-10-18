@@ -26,14 +26,15 @@ namespace SuperheroAPI.Repository
         public void ConvertJSON()
         {
             List<Contestant> contestantsList = JsonConvert.DeserializeObject<List<Contestant>>(response);
+
             foreach (var item in contestantsList)
             {
-                Console.WriteLine("Name : " + item.name);
-                Console.WriteLine("Durability : " + item.durability);
-                Console.WriteLine("Intelligence : " + item.intelligence);
-                Console.WriteLine("Combat : " + item.combat);
-                Console.WriteLine("Speed : " + item.speed);
-                Console.WriteLine("Strength : " + item.strength);
+                Console.WriteLine("Name : " + item.Name);
+                Console.WriteLine("Durability : " + item.Durability);
+                Console.WriteLine("Intelligence : " + item.Intelligence);
+                Console.WriteLine("Combat : " + item.Combat);
+                Console.WriteLine("Speed : " + item.Speed);
+                Console.WriteLine("Strength : " + item.Strength);
             }
         }
     }

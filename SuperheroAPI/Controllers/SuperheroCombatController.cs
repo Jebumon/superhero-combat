@@ -9,9 +9,9 @@ namespace SuperheroAPI.Controllers
     [Route("[controller]")] // think about changing this to api/v1/
     public class SuperheroCombatController : ControllerBase
     {
-        private readonly SuperheroCombatService _superheroCombatService;
+        private readonly ISuperheroCombatService _superheroCombatService;
 
-        public SuperheroCombatController(SuperheroCombatService superheroCombatService)
+        public SuperheroCombatController(ISuperheroCombatService superheroCombatService)
         {
             _superheroCombatService = superheroCombatService;
         }

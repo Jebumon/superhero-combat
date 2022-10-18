@@ -4,6 +4,7 @@
     {
         CloseCall,
         SolidWin,
-        NoChance
+        NoChance,
+        Tie
     }
 }

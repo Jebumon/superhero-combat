@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Collections;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
 using Microsoft.VisualBasic;
 using SuperheroAPI.Models;
@@ -16,8 +17,7 @@ namespace SuperheroAPI.Services
             
         public CombatResult DoCombat(List<Contestant> ContestantList, Battlefield battlefield) 
         {
-            float calculateContestant1Score = 0.0f;
-            float calculateContestant2Score = 0.0f;
+            float eachContestantScore = 0.0f;
             float diff1 = 0.0f;
             float diff2 = 0.0f;
             float eachContestantPower = 0.0f;
@@ -26,7 +26,7 @@ namespace SuperheroAPI.Services
             float eachContestantStrength = 0.0f;
             float eachContestantIntelligence = 0.0f;
             float eachContestantSpeed = 0.0f;
-
+            Hashtable ContestantScore = new Hashtable();
 
             foreach (Contestant ContestantDetails in ContestantList)
             {
@@ -36,11 +36,13 @@ namespace SuperheroAPI.Services
                 eachContestantStrength = ContestantDetails.Strength * battlefield.StrengthMod;
                 eachContestantIntelligence = ContestantDetails.Intelligence * battlefield.IntelligenceMod;
                 eachContestantSpeed = ContestantDetails.Speed * battlefield.SpeedMod;
-                calculateContestant1Score = eachContestantPower + eachContestantCombat + eachContestantDurability + eachContestantStrength + eachContestantIntelligence + eachContestantSpeed;
+                eachContestantScore = eachContestantPower + eachContestantCombat + eachContestantDurability + eachContestantStrength + eachContestantIntelligence + eachContestantSpeed;
+                ContestantScore.Add(ContestantDetails.Name, eachContestantScore);
+
             }
                 
          
-            diff1 = calculateContestant1Score - calculateContestant2Score;
+         /*   diff1 = calculateContestant1Score - calculateContestant2Score;
             diff2 = calculateContestant2Score - calculateContestant1Score;
 
             if (calculateContestant1Score > calculateContestant2Score)
@@ -61,7 +63,7 @@ namespace SuperheroAPI.Services
             }
             else if (calculateContestant1Score < calculateContestant2Score)
             {
-            //    combatResult.Winner = contestant2.Name;
+                combatResult.Winner = contestant2.Name;
                 if (diff2 < 10) // difference value for close call needs to be set
                 {
                     // win margin should be close call
@@ -78,7 +80,7 @@ namespace SuperheroAPI.Services
             else if (calculateContestant1Score == calculateContestant2Score)
             {
                 // for this scenrio, what are we going to do
-            }
+            }*/
             return combatResult;   
         }
     }

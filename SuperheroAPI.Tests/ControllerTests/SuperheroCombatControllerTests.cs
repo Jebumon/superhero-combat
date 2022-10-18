@@ -23,4 +23,10 @@ public class SuperheroCombatControllerTests
        // _mockSuperheroCombatService.Setup(s => s.GetSuperheroPowerstats(Jasmine)).Returns(testContestant);
         Assert.Pass();
     }
+
+    [Test]
+    public void Test2()
+    {
+        Assert.Pass();
+    }
 }

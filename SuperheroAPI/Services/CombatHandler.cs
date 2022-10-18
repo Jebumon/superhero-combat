@@ -9,11 +9,11 @@ namespace SuperheroAPI.Services
     {
         private Battlefield battlefield;
         private CombatResult combatResult;
-    
-        public CombatHandler(List<Contestant> Contestants, Battlefield battlefield)
+
+        public CombatHandler()
         {
-            this.battlefield = battlefield;
         }
+            
         public CombatResult DoCombat(List<Contestant> ContestantList, Battlefield battlefield) 
         {
             float calculateContestant1Score = 0.0f;

@@ -2,7 +2,7 @@
 {
     public struct CombatResult
     {
-        public readonly string Winner;
+        public string Winner;
         public readonly WinMargin WinMargin;
 
         public CombatResult(string winner, WinMargin winMargin)

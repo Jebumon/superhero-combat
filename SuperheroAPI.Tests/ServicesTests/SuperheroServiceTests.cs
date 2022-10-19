@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SuperheroAPI.Controllers;
+using SuperheroAPI.Models;
+using SuperheroAPI.Services;
+namespace SuperheroAPI.Tests.ControllerTests;
 
-namespace SuperheroAPI.Tests.ServicesTests
+public class SuperheroCombatServiceTests
 {
-    internal class SuperheroServiceTests
+    SuperheroCombatService service;
+
+    [SetUp]
+    public void Setup()
     {
+        service = new();
+    }
+
+    [Test]
+    public void Fight_Must_Return_CombatResult()
+    {
+        service.Fight("Superman", "Batman", "Volcano").Should().BeOfType(typeof(CombatResult));
+    }
+
+    [Test]
+    public void GetAllNamed_Tests()
+    {
+        service.GetPowerstats("Batman").Count().Should().Be(2);
     }
 }

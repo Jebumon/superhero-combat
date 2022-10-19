@@ -22,7 +22,7 @@ namespace SuperheroAPI.Controllers
             return superhero;
         }
 
-        [HttpGet("Combat/{contestantName1}/{contestantName2}/{battlefield}")]
+        [HttpGet("Combat/{contestantName1}/{contestantName2}/{battlefieldName}")]
         public ActionResult<CombatResult> CombatNow(string contestantName1, string contestantName2, string battlefieldName)
         {
             var results = _superheroCombatService.Fight(contestantName1, contestantName2, battlefieldName);

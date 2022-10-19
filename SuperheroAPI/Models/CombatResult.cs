@@ -2,8 +2,8 @@
 {
     public struct CombatResult
     {
-        public readonly string Winner;
-        public readonly WinMargin WinMargin;
+        public string Winner { get; private set; }
+        public WinMargin WinMargin { get; private set; }
 
         public CombatResult(string winner, WinMargin winMargin)
         {

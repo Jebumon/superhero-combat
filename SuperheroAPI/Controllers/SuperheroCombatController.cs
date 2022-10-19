@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using SuperheroAPI.Controllers;
 using SuperheroAPI.Models;
 using SuperheroAPI.Services;
 
@@ -17,16 +16,17 @@ namespace SuperheroAPI.Controllers
         }
 
         [HttpGet("Powerstats/{name}")]
-        public ActionResult<Contestant> GetSuperheroPowerstats(string name)
+        public ActionResult<IEnumerable<Contestant>> GetSuperheroPowerstats(string name)
         {
-            var testContestant = new Contestant("Jasmine", 100, 100, 100, 100, 100, 100);
-            return testContestant;
+            var superhero = _superheroCombatService.GetPowerstats(name);
+            return superhero;
         }
 
-        [HttpGet("Combat/{name1}/{name2}/{battlefield}")]
-        public string CombatNow()
+        [HttpGet("Combat/{contestantName1}/{contestantName2}/{battlefield}")]
+        public ActionResult<CombatResult> CombatNow(string contestantName1, string contestantName2, string battlefieldName)
         {
-            return "The combat to begin!";
+            var results = _superheroCombatService.Fight(contestantName1, contestantName2, battlefieldName);
+            return results;
         }
     }
 }

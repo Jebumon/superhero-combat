@@ -4,12 +4,12 @@
     {
         private static readonly List<Battlefield> battlefields = new()
         {
-            new Battlefield("Volcano", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f),
-            new Battlefield("Space", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f),
-            new Battlefield("Underwater", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f),
-            new Battlefield("Multiverse", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f),
-            new Battlefield("placeholder1", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f),
-            new Battlefield("placeholder2", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f)
+            new Battlefield("Volcano", 0.2f, 1f, 0.2f, 0.2f, 0.2f, 0.2f),
+            new Battlefield("Area51", 0.2f, 0.2f, 1f, 0.2f, 0.2f, 0.2f),
+            new Battlefield("HighGPlanet", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 1f),
+            new Battlefield("Multiverse", 0.2f, 0.2f, 0.2f, 1f, 0.2f, 0.2f),
+            new Battlefield("BankVault", 1f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f),
+            new Battlefield("OpenField", 0.2f, 0.2f, 0.2f, 0.2f, 1f, 0.2f)
         };
 
         public static Battlefield GetBattlefield(string name)

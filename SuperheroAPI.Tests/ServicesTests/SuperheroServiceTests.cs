@@ -16,7 +16,7 @@ public class SuperheroCombatServiceTests
     [Test]
     public void Fight_Must_Return_CombatResult()
     {
-        service.Fight("Superman", "Batman", "Volcano").Should().BeOfType(typeof(CombatResult));
+        service.Fight("Catwoman", "Wolverine", "BankVault").Should().BeOfType(typeof(CombatResult));
     }
 
     [Test]

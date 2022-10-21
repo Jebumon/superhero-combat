@@ -1,5 +1,6 @@
 ﻿using SuperheroAPI.Models;
 using SuperheroAPI.Repository;
+using System.Collections;
 
 namespace SuperheroAPI.Services
 {
@@ -14,11 +15,11 @@ namespace SuperheroAPI.Services
             _combatHandler = new();
         }
 
-        public CombatResult Fight(string contestantNameA, string contestantNameB, string battlefieldName)
+        public CombatResult Fight(Hashtable contestantsNames, string battlefieldName)
         {
             Battlefield battlefield = BattlefieldList.GetBattlefield(battlefieldName);
-            string[] namesArray = { contestantNameA, contestantNameB };
-            List<Contestant> contestants = _repository.GetContestants(namesArray);
+
+            List<Contestant> contestants = _repository.GetContestants(contestantsNames);
 
             return _combatHandler.DoCombat(contestants, battlefield);
         }

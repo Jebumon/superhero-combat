@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SuperheroAPI.Models;
 using SuperheroAPI.Services;
+using System.Collections;
 
 namespace SuperheroAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace SuperheroAPI.Controllers
         [HttpGet("Combat/{contestantName1}/{contestantName2}/{battlefieldName}")]
         public ActionResult<CombatResult> CombatNow(string contestantName1, string contestantName2, string battlefieldName)
         {
-            var results = _superheroCombatService.Fight(contestantName1, contestantName2, battlefieldName);
+            var results = _superheroCombatService.Fight(new Hashtable(), battlefieldName);
             return results;
         }
     }

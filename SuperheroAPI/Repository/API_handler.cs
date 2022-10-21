@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SuperheroAPI.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SuperheroAPI.Repository
 {
@@ -8,37 +9,42 @@ namespace SuperheroAPI.Repository
     {
         private readonly string URL = "https://www.superheroapi.com/api.php/";
         private readonly string API_ACCESS_TOKEN = "102858579285044";
-        private string response = "";
+        private string? response { get; set; }
         HttpClient client = new HttpClient();
 
         private string[] _contestants { get; set; }
-        List<Contestant> contestantsList = new List<Contestant>();
+        private List<Contestant> contestantsList = new List<Contestant>();
         public API_handler(string[] contestants)
         {
             _contestants = contestants;
-            Console.WriteLine(string.Join(",", _contestants)+"\n");
+            Console.WriteLine(string.Join(",", _contestants) + "\n");
         }
 
-        public List<Contestant> GetContestantsList() 
+        public List<Contestant> GetContestantsList()
         {
             GetDataAsync().Wait();
             return contestantsList;
         }
-        public async Task GetDataAsync() 
+        public async Task GetDataAsync()
         {
             foreach (string contestant in _contestants)
             {
                 await GetJSON(contestant);
-                var contestantObject = ConvertJSON();
-                contestantsList.Add(contestantObject);
+                ConvertJSON(contestant);
             }
         }
         public async Task GetJSON(string contestant)
         {
-            response = await client.GetStringAsync(URL + API_ACCESS_TOKEN + "/search/" + contestant);
-            //Console.WriteLine(response);
+            try
+            {
+                response = await client.GetStringAsync(URL + API_ACCESS_TOKEN + "/search/" + contestant);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("API error");
+            }
         }
-        public Contestant ConvertJSON()
+        public void ConvertJSON(string contestant)
         {
             string name = "";
             int combat = 0;
@@ -48,29 +54,44 @@ namespace SuperheroAPI.Repository
             int speed = 0;
             int strength = 0;
 
-            var contestantsList = JsonConvert.DeserializeObject<JSON_Objects>(response);
-           
-            foreach (var result in contestantsList.Results)
+            var contestantsObjects = JsonConvert.DeserializeObject<JSON_Objects>(response);
+            if (contestantsObjects.Response == "success")
             {
-                name = contestantsList.ResultsFor;
-                combat = Int32.Parse(result.Powerstats.Combat);
-                durability = Int32.Parse(result.Powerstats.Durability);
-                intelligence = Int32.Parse(result.Powerstats.Intelligence);
-                power = Int32.Parse(result.Powerstats.Power);
-                speed = Int32.Parse(result.Powerstats.Speed);
-                strength = Int32.Parse(result.Powerstats.Strength);
+                foreach (var result in contestantsObjects.Results)
+                {
+                    try
+                    {
+                        name = result.Name;
+                        combat = Int32.Parse(result.Powerstats.Combat);
+                        durability = Int32.Parse(result.Powerstats.Durability);
+                        intelligence = Int32.Parse(result.Powerstats.Intelligence);
+                        power = Int32.Parse(result.Powerstats.Power);
+                        speed = Int32.Parse(result.Powerstats.Speed);
+                        strength = Int32.Parse(result.Powerstats.Strength);
+                    }
+                    catch (Exception)
+                    {
+                    }
 
-                /*Console.WriteLine("Name : " + name);
-                Console.WriteLine("Durability : " + durability);
-                Console.WriteLine("Intelligence : " + intelligence);
-                Console.WriteLine("Combat : " + combat);
-                Console.WriteLine("Power : " + power);
-                Console.WriteLine("Speed : " + speed);
-                Console.WriteLine("Strength : " + strength);*/
-                
+                    if (name == contestant)
+                    {
+                        Contestant contestantObject = new Contestant(name, combat, durability, intelligence, power, speed, strength);
+                        if (this.contestantsList.Exists(x => x.Name == name) || combat + durability + intelligence + power + speed + strength == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            this.contestantsList.Add(contestantObject);
+                        }
+                    }
+                }
             }
-            Contestant contestantObject = new Contestant(name, combat, durability, intelligence, power, speed, strength);
-            return contestantObject;
+            else
+            {
+                Console.WriteLine("Error that SuperHero not found");
+                //throw new InvalidSuperHeroNameException();
+            }
         }
     }
 }

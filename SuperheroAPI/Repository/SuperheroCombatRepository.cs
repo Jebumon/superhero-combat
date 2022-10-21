@@ -1,13 +1,9 @@
-﻿using Newtonsoft.Json;
-using SuperheroAPI.Models;
+﻿using SuperheroAPI.Models;
 
 namespace SuperheroAPI.Repository
 {
     public class SuperheroCombatRepository
     {
-        List<Contestant> contestantsList = new List<Contestant>();
-
-
         public List<Contestant> GetContestants(string[] names)
         {
             API_handler APIhandler = new API_handler(names);
@@ -16,6 +12,9 @@ namespace SuperheroAPI.Repository
         }
         public List<Contestant> GetAllNamed(string name)
         {
+            string[] singleName =  {name};
+            API_handler APIhandler = new API_handler(singleName);
+            var contestantsList = APIhandler.GetContestantsList();
             return contestantsList;
         }
     }

@@ -15,10 +15,10 @@ namespace SuperheroAPI.Controllers
             _superheroCombatService = superheroCombatService;
         }
 
-        [HttpGet("Powerstats/{name}")]
-        public ActionResult<IEnumerable<Contestant>> GetSuperheroPowerstats(string name)
+        [HttpGet("GetAllSuperheroesNamed/{name}")]
+        public ActionResult<IEnumerable<Contestant>> GetAllSuperheroesNamed(string name)
         {
-            var superhero = _superheroCombatService.GetPowerstats(name);
+            var superhero = _superheroCombatService.GetAllNamed(name);
             return superhero;
         }
 

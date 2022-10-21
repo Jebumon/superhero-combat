@@ -47,6 +47,7 @@ namespace SuperheroAPI.Repository
         public void ConvertJSON(string contestant)
         {
             string name = "";
+            string realName = "";
             int combat = 0;
             int durability = 0;
             int intelligence = 0;
@@ -62,6 +63,7 @@ namespace SuperheroAPI.Repository
                     try
                     {
                         name = result.Name;
+                        realName = result.Biography.FullName;
                         combat = Int32.Parse(result.Powerstats.Combat);
                         durability = Int32.Parse(result.Powerstats.Durability);
                         intelligence = Int32.Parse(result.Powerstats.Intelligence);
@@ -75,8 +77,8 @@ namespace SuperheroAPI.Repository
 
                     if (name == contestant)
                     {
-                        Contestant contestantObject = new Contestant(name, combat, durability, intelligence, power, speed, strength);
-                        if (this.contestantsList.Exists(x => x.Name == name) || combat + durability + intelligence + power + speed + strength == 0)
+                        Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
+                        if (this.contestantsList.Exists(x => x.Name == name) || combat * durability * intelligence * power * speed * strength == 0)
                         {
                             break;
                         }

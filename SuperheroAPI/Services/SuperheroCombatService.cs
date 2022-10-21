@@ -23,7 +23,7 @@ namespace SuperheroAPI.Services
             return _combatHandler.DoCombat(contestants, battlefield);
         }
 
-        public List<Contestant> GetPowerstats(string name)
+        public List<Contestant> GetAllNamed(string name)
         {
             return _repository.GetAllNamed(name);
         }

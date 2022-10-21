@@ -6,7 +6,7 @@ using System.Collections;
 namespace SuperheroAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")] // think about changing this to api/v1/
+    [Route("api/v1/")]
     public class SuperheroCombatController : ControllerBase
     {
         private readonly ISuperheroCombatService _superheroCombatService;
@@ -16,18 +16,29 @@ namespace SuperheroAPI.Controllers
             _superheroCombatService = superheroCombatService;
         }
 
-        [HttpGet("GetAllSuperheroesNamed/{name}")]
+        [HttpGet("GetSuperheroes/{name}")]
         public ActionResult<IEnumerable<Contestant>> GetAllSuperheroesNamed(string name)
         {
             var superhero = _superheroCombatService.GetAllNamed(name);
             return superhero;
         }
 
-        [HttpGet("Combat/{contestantName1}/{contestantName2}/{battlefieldName}")]
-        public ActionResult<CombatResult> CombatNow(string contestantName1, string contestantName2, string battlefieldName)
+        [HttpGet("{battlefieldName}/{contestantName1}/{contestantName2}/{contestantRealName1?}/{contestantRealName2?}")]
+        public ActionResult<CombatResult> CombatNow(string battlefieldName, string contestantName1, string contestantName2, string contestantRealName1 = "NO NEED", string contestantRealName2 = "NO NEED")
         {
-            var results = _superheroCombatService.Fight(new Hashtable(), battlefieldName);
+            Hashtable inputNames = new();
+
+            if (contestantRealName1 == "NO NEED")
+                contestantRealName1 = " ";
+
+            if (contestantRealName2 == "NO NEED")
+                contestantRealName2 = " ";
+
+            inputNames.Add(contestantName1, contestantRealName1);
+            inputNames.Add(contestantName2, contestantRealName2);
+
+            var results = _superheroCombatService.Fight(inputNames, battlefieldName);
             return results;
         }
-    }
+    }   
 }

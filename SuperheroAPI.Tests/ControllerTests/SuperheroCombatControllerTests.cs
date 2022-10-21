@@ -4,6 +4,7 @@ using SuperheroAPI.Controllers;
 using SuperheroAPI.Models;
 using SuperheroAPI.Services;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using System.Collections;
 
 namespace SuperheroAPI.Tests.ControllerTests;
 
@@ -26,11 +27,11 @@ public class SuperheroCombatControllerTests
     {
         // Arrange
         List<Contestant> testContestant = new List<Contestant>();
-        testContestant.Add(new Contestant(_contestantName1, 100, 100, 100, 100, 100, 100));
-        _mockSuperheroCombatService.Setup(s => s.GetPowerstats(_contestantName1)).Returns(testContestant);
+        testContestant.Add(new Contestant(_contestantName1, " ", 100, 100, 100, 100, 100, 100));
+        _mockSuperheroCombatService.Setup(s => s.GetAllNamed(_contestantName1)).Returns(testContestant);
 
         // Act
-        var result = _controller.GetSuperheroPowerstats(_contestantName1);
+        var result = _controller.GetAllSuperheroesNamed(_contestantName1);
 
         // Assert
         result.Should().BeOfType(typeof(ActionResult<IEnumerable<Contestant>>));
@@ -41,11 +42,12 @@ public class SuperheroCombatControllerTests
     public void CombatNow_Returns_A_CombatResult_With_A_Winner()
     {
         // Arrange
+        Hashtable inputNames = new();
         CombatResult combatResult = new CombatResult(_contestantName1, WinMargin.CloseCall);
-        _mockSuperheroCombatService.Setup(s => s.Fight(_contestantName1, _contestantName2, "Volcano")).Returns(combatResult);
+        _mockSuperheroCombatService.Setup(s => s.Fight(inputNames, "Volcano")).Returns(combatResult);
 
         // Act
-        var result = _controller.CombatNow(_contestantName1, _contestantName2, "Volcano");
+        var result = _controller.CombatNow("Volcano", _contestantName1, "NO NEED", _contestantName2, "NO NEED");
 
         // Assert
         result.Value.Should().BeEquivalentTo(combatResult);

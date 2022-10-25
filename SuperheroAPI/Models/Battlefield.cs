@@ -7,10 +7,10 @@
         public readonly float DurabilityMod;
         public readonly float IntelligenceMod;
         public readonly float PowerMod;
-        public readonly float StrengthMod;
         public readonly float SpeedMod;
+        public readonly float StrengthMod;
 
-        public Battlefield(string name, float combatMod, float durabilityMod, float intelligenceMod, float powerMod, float strengthMod, float speedMod)
+        public Battlefield(string name, float combatMod, float durabilityMod, float intelligenceMod, float powerMod, float speedMod, float strengthMod)
         {
             Name = name;
             CombatMod = combatMod;

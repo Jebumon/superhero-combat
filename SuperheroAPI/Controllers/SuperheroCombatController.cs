@@ -29,10 +29,10 @@ namespace SuperheroAPI.Controllers
             Hashtable inputNames = new();
 
             if (contestantRealName1 == "NO NEED")
-                contestantRealName1 = " ";
+                contestantRealName1 = "";
 
             if (contestantRealName2 == "NO NEED")
-                contestantRealName2 = " ";
+                contestantRealName2 = "";
 
             inputNames.Add(contestantName1, contestantRealName1);
             inputNames.Add(contestantName2, contestantRealName2);

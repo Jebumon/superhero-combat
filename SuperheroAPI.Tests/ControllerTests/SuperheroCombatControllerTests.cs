@@ -27,7 +27,7 @@ public class SuperheroCombatControllerTests
     {
         // Arrange
         List<Contestant> testContestant = new List<Contestant>();
-        testContestant.Add(new Contestant(_contestantName1, " ", 100, 100, 100, 100, 100, 100));
+        testContestant.Add(new Contestant(_contestantName1, "", 100, 100, 100, 100, 100, 100));
         _mockSuperheroCombatService.Setup(s => s.GetAllNamed(_contestantName1)).Returns(testContestant);
 
         // Act

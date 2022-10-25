@@ -20,8 +20,8 @@ namespace SuperheroAPI.Tests.ServicesTests
         public void Calculate_Correct_WinMargin_As_SolidWin_And_Winner()
         {
             List<Contestant> ContestantList = new List<Contestant>();
-            ContestantList.Add(new Contestant("Batgirl", 88, 11, 33, 40, 34, 90));
-            ContestantList.Add(new Contestant("Falcon", 38, 13, 50, 28, 22, 64));
+            ContestantList.Add(new Contestant("Batgirl", "", 88, 11, 33, 40, 34, 90));
+            ContestantList.Add(new Contestant("Falcon", "", 38, 13, 50, 28, 22, 64));
             _battlefield = new Battlefield("Volcano", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f);
             _combatResult = _combatHandler.DoCombat(ContestantList, _battlefield);
             _combatResult.WinMargin.Should().Be(WinMargin.SolidWin);
@@ -32,8 +32,8 @@ namespace SuperheroAPI.Tests.ServicesTests
         public void Calculate_Correct_WinMargin_As_NoChance_And_Winner()
         {
             List<Contestant> ContestantList = new List<Contestant>();
-            ContestantList.Add(new Contestant("A-Bomb", 8, 3, 10, 8, 2, 4));
-            ContestantList.Add(new Contestant("Batgirl", 88, 11, 33, 40, 34, 90));
+            ContestantList.Add(new Contestant("A-Bomb", "", 8, 3, 10, 8, 2, 4));
+            ContestantList.Add(new Contestant("Batgirl", "", 88, 11, 33, 40, 34, 90));
             _battlefield = new Battlefield("Volcano", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f);
             _combatResult = _combatHandler.DoCombat(ContestantList, _battlefield);
             _combatResult.WinMargin.Should().Be(WinMargin.NoChance);
@@ -44,8 +44,8 @@ namespace SuperheroAPI.Tests.ServicesTests
         public void Calculate_Correct_WinMargin_As_CloseCall_And_Winner()
         {
             List<Contestant> ContestantList = new List<Contestant>();
-            ContestantList.Add(new Contestant("A-Bomb", 88, 13, 10, 38, 32, 94));
-            ContestantList.Add(new Contestant("Batgirl", 88, 11, 33, 40, 34, 90));
+            ContestantList.Add(new Contestant("A-Bomb", "", 88, 13, 10, 38, 32, 94));
+            ContestantList.Add(new Contestant("Batgirl", "", 88, 11, 33, 40, 34, 90));
             _battlefield = new Battlefield("Volcano", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f);
             _combatResult = _combatHandler.DoCombat(ContestantList, _battlefield);
             _combatResult.WinMargin.Should().Be(WinMargin.CloseCall);
@@ -56,8 +56,8 @@ namespace SuperheroAPI.Tests.ServicesTests
         public void Calculate_Correct_WinMargin_As_Tie_And_Winner()
         {
             List<Contestant> ContestantList = new List<Contestant>();
-            ContestantList.Add(new Contestant("Batgirl", 88, 11, 33, 40, 34, 90));
-            ContestantList.Add(new Contestant("A-Bomb", 88, 11, 33, 40, 34, 90));
+            ContestantList.Add(new Contestant("Batgirl", "", 88, 11, 33, 40, 34, 90));
+            ContestantList.Add(new Contestant("A-Bomb", "", 88, 11, 33, 40, 34, 90));
             _battlefield = new Battlefield("Volcano", 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f);
             _combatResult = _combatHandler.DoCombat(ContestantList, _battlefield);
             _combatResult.WinMargin.Should().Be(WinMargin.Tie);

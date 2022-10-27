@@ -83,16 +83,30 @@ namespace SuperheroAPI.Repository
                     catch (Exception)
                     {
                     }
-                    if(inputRealName == "GetAllNamed") 
+                    if (inputRealName == "GetAllNamed")
                     {
                         Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
-                        this.contestantsList.Add(contestantObject);
+                        if (this.contestantsList.Exists(x => x.RealName == realName) || combat * durability * intelligence * power * speed * strength == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            this.contestantsList.Add(contestantObject);
+                            combat = 0;
+                            durability = 0;
+                            intelligence = 0;
+                            power = 0;
+                            speed = 0;
+                            strength = 0;
+                        }
                     }
                     if (name == contestant && inputRealName == realName || name == contestant && inputRealName == "")
                     {
                         Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
-                        if (this.contestantsList.Exists(x => x.RealName == realName && x.Name == name) || combat * durability * intelligence * power * speed * strength == 0)
+                        if (this.contestantsList.Exists(x => x.Name == name) || combat * durability * intelligence * power * speed * strength == 0)
                         {
+                            throw new ArgumentException("There is more than one same superhero Please enter their Real name");
                             break;
                         }
                         else

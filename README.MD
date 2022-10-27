@@ -25,35 +25,47 @@ To run the application:
 
 # Key Features
 There are two GET endpoints:
-## 1) GetSuperheroes - enter a name
+### 1) GetSuperheroes - enter a name
 - This enables the user to check if a superhero exists. If yes, they can view the superhero's powerstats, eg:
 
-```{
-      "id": "620",
-      "name": "Spider-Man",
-      "powerstats": {
-        "intelligence": "90",
-        "strength": "55",
-        "speed": "67",
-        "durability": "75",
-        "power": "74",
-        "combat": "85"
-      },
+```
+  {
+    "name": "Plastic Man",
+    "realName": "Patrick O'Brian",
+    "combat": 56,
+    "durability": 100,
+    "intelligence": 50,
+    "power": 100,
+    "speed": 23,
+    "strength": 63
+  }
  ```
 - In the case of duplicates, the user can then see different 'full-names' of the superhero and then specify the intended one in the Combat end point.
 
-## 2) Combat endpoint - enter a battlefield and two superhero names
-- The battlefields are:
+### 2) Combat endpoint - enter a battlefield and two superhero names (optional real names)
+- Valid battlefields are:
+```
+Volcano, Area51, HighGPlanet, Multiverse, BankVault, OpenField
+```
 
 - The win margin is:
+```
+CloseCall, SolidWin, NoChance, Tie
+```
+- In the case where there are multiple superheroes of the same name returned, you will then have to input your chosen [more specific] superhero by putting the Real Name, for example:
+![image](https://user-images.githubusercontent.com/111430146/198313003-db69c91e-d5ab-4fc3-8890-3190d837309e.png)
 
 # Assumptions
 The superhero exists!
 # Approaches
+## Design
+There are 3 layers: The Controller, The Service and The Repository
+
 ## Class Diagram
 - Pradeepa
 ## Flow Diagram
 This is the initial flow:
+
 ![Code Flow](https://user-images.githubusercontent.com/111430146/196816535-ffc2abeb-2b5f-4d80-9b08-034d03b572c9.jpg)
 
 # Future Considerations

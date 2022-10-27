@@ -40,7 +40,7 @@ There are two GET endpoints:
     "strength": 63
   }
  ```
-- In the case of duplicates, the user can then see different 'full-names' of the superhero and then specify the intended one in the Combat end point.
+- In the case of duplicates, the user can then see the different 'realName' of the superheroes and specify the intended one in the Combat end point.
 
 ### 2) Combat endpoint - enter a battlefield and two superhero names (optional real names)
 - Valid battlefields are:
@@ -62,7 +62,7 @@ The superhero exists!
 There are 3 layers: The Controller, The Service and The Repository
 
 ## Class Diagram
-- Pradeepa
+- to be added
 ## Flow Diagram
 This is the initial flow:
 

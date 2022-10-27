@@ -47,7 +47,7 @@ public class SuperheroCombatControllerTests
         _mockSuperheroCombatService.Setup(s => s.Fight(inputNames, "Volcano")).Returns(combatResult);
 
         // Act
-        var result = _controller.CombatNow("Volcano", _contestantName1, "NO NEED", _contestantName2, "NO NEED");
+        var result = _controller.CombatNow("Volcano", _contestantName1, "", _contestantName2, "");
 
         // Assert
         result.Value.Should().BeEquivalentTo(combatResult);

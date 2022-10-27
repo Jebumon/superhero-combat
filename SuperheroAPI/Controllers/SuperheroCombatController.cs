@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SuperheroAPI.Models;
 using SuperheroAPI.Services;
 using System.Collections;
+using System.Net;
 
 namespace SuperheroAPI.Controllers
 {
@@ -34,11 +35,25 @@ namespace SuperheroAPI.Controllers
             if (contestantRealName2 == "NO NEED")
                 contestantRealName2 = "";
 
-            inputNames.Add(contestantName1, contestantRealName1);
-            inputNames.Add(contestantName2, contestantRealName2);
+            try
+            {
+                inputNames.Add(contestantName1, contestantRealName1);
+                inputNames.Add(contestantName2, contestantRealName2);
+            }
+            catch
+            {
+                return Problem("Contestants must be different!", statusCode: (int)HttpStatusCode.BadRequest);
+            }
 
-            var results = _superheroCombatService.Fight(inputNames, battlefieldName);
-            return results;
+            try
+            {
+                var results = _superheroCombatService.Fight(inputNames, battlefieldName);
+                return results;
+            }
+            catch (Exception e)
+            {
+                return Problem(e.ToString(), statusCode: (int)HttpStatusCode.BadRequest);
+            }
         }
     }   
 }

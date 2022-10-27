@@ -16,11 +16,6 @@ namespace SuperheroAPI.Repository
         private string[] _contestants { get; set; } = new string[10];
         private string[] _inputRealNames { get; set; } = new string[10];
         private List<Contestant> contestantsList = new List<Contestant>();
-        public API_handler(string[] contestants)
-        {
-            _contestants = contestants;
-            Console.WriteLine(string.Join(",", _contestants) + "\n");
-        }
 
         public API_handler(Hashtable names) 
         {
@@ -88,7 +83,11 @@ namespace SuperheroAPI.Repository
                     catch (Exception)
                     {
                     }
-
+                    if(inputRealName == "GetAllNamed") 
+                    {
+                        Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
+                        this.contestantsList.Add(contestantObject);
+                    }
                     if (name == contestant && inputRealName == realName || name == contestant && inputRealName == "")
                     {
                         Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);

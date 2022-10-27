@@ -7,8 +7,7 @@ namespace SuperheroAPI.Repository
     {
         public List<Contestant> GetContestants(Hashtable names)
         {
-            string[] placeholder = { "", "" };
-            API_handler APIhandler = new API_handler(placeholder);
+            API_handler APIhandler = new API_handler(names);
             var contestantsList = APIhandler.GetContestantsList();
             return contestantsList;
         }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SuperheroAPI.Models;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,12 +13,18 @@ namespace SuperheroAPI.Repository
         private string? response { get; set; }
         HttpClient client = new HttpClient();
 
-        private string[] _contestants { get; set; }
+        private string[] _contestants { get; set; } = new string[10];
+        private string[] _inputRealNames { get; set; } = new string[10];
         private List<Contestant> contestantsList = new List<Contestant>();
-        public API_handler(string[] contestants)
+
+        public API_handler(Hashtable names) 
         {
-            _contestants = contestants;
-            Console.WriteLine(string.Join(",", _contestants) + "\n");
+            int i = 0;
+            foreach (DictionaryEntry name in names) 
+            {
+                _contestants[i] = name.Key.ToString();
+                _inputRealNames[i++] = name.Value.ToString();
+            }
         }
 
         public List<Contestant> GetContestantsList()
@@ -27,10 +34,12 @@ namespace SuperheroAPI.Repository
         }
         public async Task GetDataAsync()
         {
+            int i = 0;
             foreach (string contestant in _contestants)
             {
+                string inputRealName = _inputRealNames[i++];
                 await GetJSON(contestant);
-                ConvertJSON(contestant);
+                ConvertJSON(contestant, inputRealName);
             }
         }
         public async Task GetJSON(string contestant)
@@ -44,7 +53,7 @@ namespace SuperheroAPI.Repository
                 Console.WriteLine("API error");
             }
         }
-        public void ConvertJSON(string contestant)
+        public void ConvertJSON(string contestant, string inputRealName)
         {
             string name = "";
             string realName = "";
@@ -74,11 +83,15 @@ namespace SuperheroAPI.Repository
                     catch (Exception)
                     {
                     }
-
-                    if (name == contestant)
+                    if(inputRealName == "GetAllNamed") 
                     {
                         Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
-                        if (this.contestantsList.Exists(x => x.Name == name) || combat * durability * intelligence * power * speed * strength == 0)
+                        this.contestantsList.Add(contestantObject);
+                    }
+                    if (name == contestant && inputRealName == realName || name == contestant && inputRealName == "")
+                    {
+                        Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
+                        if (this.contestantsList.Exists(x => x.RealName == realName && x.Name == name) || combat * durability * intelligence * power * speed * strength == 0)
                         {
                             break;
                         }

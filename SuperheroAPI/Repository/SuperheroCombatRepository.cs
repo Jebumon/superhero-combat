@@ -7,15 +7,15 @@ namespace SuperheroAPI.Repository
     {
         public List<Contestant> GetContestants(Hashtable names)
         {
-            string[] placeholder = { "", "" };
-            API_handler APIhandler = new API_handler(placeholder);
+            API_handler APIhandler = new API_handler(names);
             var contestantsList = APIhandler.GetContestantsList();
             return contestantsList;
         }
         public List<Contestant> GetAllNamed(string name)
         {
-            string[] singleName =  {name};
-            API_handler APIhandler = new API_handler(singleName);
+            Hashtable inputName = new Hashtable();
+            inputName.Add(name, "GetAllNamed");
+            API_handler APIhandler = new API_handler(inputName);
             var contestantsList = APIhandler.GetContestantsList();
             return contestantsList;
         }

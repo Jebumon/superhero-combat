@@ -105,7 +105,6 @@ namespace SuperheroAPI.Repository
                     }
                     else 
                     {
-                        Console.WriteLine(tempName);
                         Console.WriteLine($"{tempName} / {tempRealName}  - Powerstat zero error");
                     }
                 }

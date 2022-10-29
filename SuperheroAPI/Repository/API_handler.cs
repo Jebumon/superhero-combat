@@ -15,6 +15,8 @@ namespace SuperheroAPI.Repository
 
         private string[] _contestants { get; set; }
         private string[] _inputRealNames { get; set; }
+        private Contestant _contestantObject  { get; set;}
+
         private List<Contestant> contestantsList = new List<Contestant>();
 
         public API_handler(Hashtable names) 
@@ -55,14 +57,7 @@ namespace SuperheroAPI.Repository
         }
         public void ConvertJSON(string contestant, string inputRealName)
         {
-            string name = "";
-            string realName = "";
-            int combat = 0;
-            int durability = 0;
-            int intelligence = 0;
-            int power = 0;
-            int speed = 0;
-            int strength = 0;
+            string tempName = "", tempRealName = "";
 
             var contestantsObjects = JsonConvert.DeserializeObject<JSON_Objects>(response);
             if (contestantsObjects.Response == "success")
@@ -71,54 +66,47 @@ namespace SuperheroAPI.Repository
                 {
                     try
                     {
-                        name = result.Name;
-                        realName = result.Biography.FullName;
-                        combat = Int32.Parse(result.Powerstats.Combat);
-                        durability = Int32.Parse(result.Powerstats.Durability);
-                        intelligence = Int32.Parse(result.Powerstats.Intelligence);
-                        power = Int32.Parse(result.Powerstats.Power);
-                        speed = Int32.Parse(result.Powerstats.Speed);
-                        strength = Int32.Parse(result.Powerstats.Strength);
+                        tempName = result.Name;
+                        tempRealName = result.Biography.FullName;
+                        _contestantObject = new Contestant(result.Name, result.Biography.FullName, 
+                            Int32.Parse(result.Powerstats.Combat), Int32.Parse(result.Powerstats.Durability), 
+                            Int32.Parse(result.Powerstats.Intelligence), Int32.Parse(result.Powerstats.Power), 
+                            Int32.Parse(result.Powerstats.Speed), Int32.Parse(result.Powerstats.Strength));
                     }
                     catch (Exception)
                     {
                     }
-                    if (combat * durability * intelligence * power * speed * strength != 0)
+                    if (_contestantObject.Combat * _contestantObject.Durability * _contestantObject.Intelligence * _contestantObject.Power * _contestantObject.Speed * _contestantObject.Strength != 0 )
                     {
                         if (inputRealName == "GetAllNamed")
                         {
-                            Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
-                            if (this.contestantsList.Exists(x => x.RealName == realName))
+                            if (this.contestantsList.Exists(x => x.RealName == _contestantObject.RealName))
                             {
                                 break;
                             }
                             else
                             {
-                                this.contestantsList.Add(contestantObject);
-                                combat = 0;
-                                durability = 0;
-                                intelligence = 0;
-                                power = 0;
-                                speed = 0;
-                                strength = 0;
+                                this.contestantsList.Add(_contestantObject);
+                                _contestantObject = new Contestant("", "", 0, 0, 0, 0, 0, 0);
                             }
                         }
-                        if (name == contestant && inputRealName == realName || name == contestant && inputRealName == "")
+                        if (_contestantObject.Name == contestant && _contestantObject.RealName == inputRealName || _contestantObject.Name == contestant && inputRealName == "")
                         {
-                            Contestant contestantObject = new Contestant(name, realName, combat, durability, intelligence, power, speed, strength);
-                            if (this.contestantsList.Exists(x => x.Name == name))
+                            if (this.contestantsList.Exists(x => x.Name == _contestantObject.Name))
                             {
-                                throw new ArgumentException($"There is more than one {name}!! Please enter their Real name");
+                                throw new ArgumentException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
                             }
                             else
                             {
-                                this.contestantsList.Add(contestantObject);
+                                this.contestantsList.Add(_contestantObject);
+                                _contestantObject = new Contestant("", "", 0, 0, 0, 0, 0, 0);
                             }
                         }
                     }
                     else 
                     {
-                        Console.WriteLine($"{name} / { realName}  - Powerstat zero error");
+                        Console.WriteLine(tempName);
+                        Console.WriteLine($"{tempName} / {tempRealName}  - Powerstat zero error");
                     }
                 }
             }

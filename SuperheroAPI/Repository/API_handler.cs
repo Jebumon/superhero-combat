@@ -53,6 +53,7 @@ namespace SuperheroAPI.Repository
             catch (Exception)
             {
                 Console.WriteLine("API error(May be due to low internet speed!)");
+                throw new BadHttpRequestException(message: "API error(May be due to low internet speed!)");
             }
         }
         public void ConvertJSON(string contestant, string inputRealName)
@@ -94,7 +95,8 @@ namespace SuperheroAPI.Repository
                         {
                             if (this.contestantsList.Exists(x => x.Name == _contestantObject.Name))
                             {
-                                throw new ArgumentException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
+                                throw new AggregateException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
+                               
                             }
                             else
                             {

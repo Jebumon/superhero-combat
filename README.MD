@@ -98,7 +98,8 @@ Two main functions are
 - Data is returned in JSON format and this is converted to useable data classes.
 
 ## Class Diagram
-![image](https://user-images.githubusercontent.com/111430146/199102391-4cebccfd-d234-4d6a-9ca5-09bb4c2f7682.png)
+![FinalDiagram](https://user-images.githubusercontent.com/111430146/199121251-b99e7874-cba7-4b9e-9b98-d31e289cb539.JPG)
+
 
 ## Flow Diagram
 This is the Combat Flow diagram:

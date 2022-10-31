@@ -48,25 +48,28 @@ There are two GET endpoints:
 Volcano, Area51, HighGPlanet, Multiverse, BankVault, OpenField
 ```
 
+- In the case where there are multiple superheroes of the same name returned, you will then have to input your chosen [more specific] superhero by putting the Real Name, for example:
+![image](https://user-images.githubusercontent.com/111430146/198313003-db69c91e-d5ab-4fc3-8890-3190d837309e.png)
 - The win margin is:
 ```
 CloseCall, SolidWin, NoChance, Tie
 ```
-- In the case where there are multiple superheroes of the same name returned, you will then have to input your chosen [more specific] superhero by putting the Real Name, for example:
-![image](https://user-images.githubusercontent.com/111430146/198313003-db69c91e-d5ab-4fc3-8890-3190d837309e.png)
-
 # Assumptions
 The superhero exists!
 # Approaches
 ## Design
 There are 3 layers: The Controller, The Service and The Repository
+The controller - 
+The Service layer checks the validity of the battlefield and handles the battle.  The Combat Handler 
+Repo - communicates with the external API and filters the data returned, also handles exceptions (duplication error, API data returned errors). Converts JSON to datamodel.
 
 ## Class Diagram
-- to be added
-## Flow Diagram
-This is the initial flow:
+![image](https://user-images.githubusercontent.com/111430146/199102391-4cebccfd-d234-4d6a-9ca5-09bb4c2f7682.png)
 
-![Code Flow](https://user-images.githubusercontent.com/111430146/196816535-ffc2abeb-2b5f-4d80-9b08-034d03b572c9.jpg)
+## Flow Diagram
+This is the Combat Flow diagram:
+![Combat Code Flow](https://user-images.githubusercontent.com/111430146/199102930-69156113-3cab-4e6c-8437-cada5b7523e4.jpg)
+
 
 # Future Considerations
 ## Team Combat

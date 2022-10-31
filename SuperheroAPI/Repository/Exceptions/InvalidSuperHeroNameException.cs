@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace SuperheroAPI.Repository
+namespace SuperheroAPI.Repository.Exceptions
 {
     [Serializable]
     internal class InvalidSuperHeroNameException : Exception

@@ -18,8 +18,23 @@ public class SuperheroCombatServiceTests
     public void Fight_Must_Return_CombatResult()
     {
         Hashtable combat = new();
-        combat.Add("Batman", "");
         combat.Add("Superman", "");
+        combat.Add("Wolverine", "");
+        service.Fight(combat, "BankVault").Should().BeOfType(typeof(CombatResult));
+
+        combat = new();
+        combat.Add("Superman", "");
+        combat.Add("Star Girl", "");
+        service.Fight(combat, "BankVault").Should().BeOfType(typeof(CombatResult));
+
+        combat = new();
+        combat.Add("Superman", "");
+        combat.Add("Captain Marvel", "Billy Batson");
+        service.Fight(combat, "BankVault").Should().BeOfType(typeof(CombatResult));
+
+        combat = new();
+        combat.Add("Superman", "");
+        combat.Add("Martian Manhunter", "");
         service.Fight(combat, "BankVault").Should().BeOfType(typeof(CombatResult));
     }
 

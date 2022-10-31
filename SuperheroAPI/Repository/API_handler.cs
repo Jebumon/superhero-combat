@@ -85,7 +85,7 @@ namespace SuperheroAPI.Repository
                             {
                                 break;
                             }
-                            else
+                            else if(contestant == _contestantObject.Name)
                             {
                                 this.contestantsList.Add(_contestantObject);
                                 _contestantObject = new Contestant("", "", 0, 0, 0, 0, 0, 0);
@@ -98,7 +98,7 @@ namespace SuperheroAPI.Repository
                                 throw new AggregateException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
                                
                             }
-                            else
+                            else if (contestant == _contestantObject.Name)
                             {
                                 this.contestantsList.Add(_contestantObject);
                                 _contestantObject = new Contestant("", "", 0, 0, 0, 0, 0, 0);
@@ -114,8 +114,8 @@ namespace SuperheroAPI.Repository
             }
             else
             {
-                Console.WriteLine("Error that SuperHero not found");
-                //throw new InvalidSuperHeroNameException();
+                Console.WriteLine("Error: that SuperHero not found!!");
+                throw new InvalidSuperHeroNameException(message: "Error: that SuperHero not found!!");
             }
         }
     }

@@ -3,6 +3,7 @@ using SuperheroAPI.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SuperheroAPI.Repository.Exceptions;
 
 namespace SuperheroAPI.Repository
 {
@@ -95,7 +96,7 @@ namespace SuperheroAPI.Repository
                         {
                             if (this.contestantsList.Exists(x => x.Name == _contestantObject.Name))
                             {
-                                throw new AggregateException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
+                                throw new DuplicateNameException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
                                
                             }
                             else if (contestant == _contestantObject.Name)
@@ -108,7 +109,7 @@ namespace SuperheroAPI.Repository
                     else 
                     {
                         Console.WriteLine($"{tempName} / {tempRealName}  - Powerstat zero error");
-                        //throw new AggregateException($"{tempName} / {tempRealName}  - Powerstat zero error");
+                        throw new PowerStatNullException($"{tempName} / {tempRealName}  - Powerstat zero error");
                     }
                 }
             }

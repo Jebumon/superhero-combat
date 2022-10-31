@@ -20,7 +20,8 @@ To run the application:
 
 - Clone the repository to your computer
 - Run the application, for example on Visual Studio
-- After swagger loads with the API, feel free to enter two superhero names and your chosen battlefield. 
+- After swagger loads with the API, feel free to enter two superhero names and your chosen battlefield.
+- If you're unsure if the superhero exists, or are just curious how powerful the superhero is, use the GetSuperheroes endpoint to get your facts!
 - Execute to let the battle begin!
 
 # Key Features
@@ -77,14 +78,24 @@ Volcano, Area51, HighGPlanet, Multiverse, BankVault, OpenField
 ```
 CloseCall, SolidWin, NoChance, Tie
 ```
-# Assumptions
-The superhero exists!
+
 # Approaches
 ## Design
 There are 3 layers: The Controller, The Service and The Repository
-The controller - 
-The Service layer checks the validity of the battlefield and handles the battle.  The Combat Handler 
-Repo - communicates with the external API and filters the data returned, also handles exceptions (duplication error, API data returned errors). Converts JSON to datamodel.
+
+### The Controller Layer 
+This routes two HTTP GET requests to the appropriate service. 
+
+
+### The Service Layer 
+Two main functions are
+- to return a list of superheroes 
+- to handle the combat. Where there is a combat, the service also checks the validity of the battlefield and handles the battle. 
+ 
+### The Repository Layer
+- This layer communicates with an external API (as mentioned in the introduction) to retrieve superhero data and filters the data returned. 
+- It also handles exceptions, for example duplication of superheroes and errors/NULL values returned by the external API. 
+- Data is returned in JSON format and this is converted to useable data classes.
 
 ## Class Diagram
 ![image](https://user-images.githubusercontent.com/111430146/199102391-4cebccfd-d234-4d6a-9ca5-09bb4c2f7682.png)

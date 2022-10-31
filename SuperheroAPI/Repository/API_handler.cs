@@ -108,6 +108,7 @@ namespace SuperheroAPI.Repository
                     else 
                     {
                         Console.WriteLine($"{tempName} / {tempRealName}  - Powerstat zero error");
+                        //throw new AggregateException($"{tempName} / {tempRealName}  - Powerstat zero error");
                     }
                 }
             }

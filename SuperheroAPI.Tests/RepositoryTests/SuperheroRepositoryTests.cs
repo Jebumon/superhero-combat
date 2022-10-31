@@ -96,5 +96,38 @@ namespace SuperheroAPI.Tests.RepositoryTests
             var ex = Assert.Throws<AggregateException>(() => _repository.GetContestants(_inputContestants));
             Assert.That(ex.Message, Is.EqualTo($"One or more errors occurred. (There is more than one Batman!! Please enter their Real name)"));
         }
+
+        [Test]
+        public void Test_GetAllNamed_Batman_FromAPI()
+        {
+            List<Contestant> expectedOutput = new List<Contestant>();
+            _contestant = new Contestant("Batman", "Terry McGinnis", 90, 55, 81, 63, 29, 40);
+            expectedOutput.Add(_contestant);
+            _contestant = new Contestant("Batman", "Bruce Wayne", 100, 50, 100, 47, 27, 26);
+            expectedOutput.Add(_contestant);
+            _contestant = new Contestant("Batman II", "Dick Grayson", 100, 28, 88, 36, 33, 11);
+            expectedOutput.Add(_contestant);
+
+            var result = _repository.GetAllNamed("Batman");
+            result.Should().BeEquivalentTo(expectedOutput);
+        }
+
+        [Test]
+        public void Test_GetAllNamed_SpiderMan_FromAPI()
+        {
+            List<Contestant> expectedOutput = new List<Contestant>();
+            _contestant = new Contestant("Spider-Man", "Peter Parker", 85, 75, 90, 74, 67, 55);
+            expectedOutput.Add(_contestant);
+
+            var result = _repository.GetAllNamed("Spider-Man");
+            result.Should().BeEquivalentTo(expectedOutput);
+        }
+
+        /*[Test]
+        public void Test_GetAllNamed_Ammo_FromAPI()
+        {
+            var ex = Assert.Throws<AggregateException>(() => _repository.GetAllNamed("Ammo"));
+            Assert.That(ex.Message, Is.EqualTo($"One or more errors occurred. ($"{ tempName} / { tempRealName}Powerstat zero error")"));
+        }*/
     }
 }

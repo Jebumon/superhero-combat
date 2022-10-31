@@ -18,8 +18,8 @@ public class SuperheroCombatServiceTests
     public void Fight_Must_Return_CombatResult()
     {
         Hashtable combat = new();
-        combat.Add("Batman", "");
         combat.Add("Superman", "");
+        combat.Add("Spider-man", "");
         service.Fight(combat, "BankVault").Should().BeOfType(typeof(CombatResult));
     }
 

@@ -42,12 +42,16 @@ public class SuperheroCombatControllerTests
     public void CombatNow_Returns_A_CombatResult_With_A_Winner()
     {
         // Arrange
-        Hashtable inputNames = new();
-        CombatResult combatResult = new CombatResult(_contestantName1, WinMargin.CloseCall);
+        Hashtable inputNames = new()
+        {
+            { _contestantName1, "" },
+            { _contestantName2, "" }
+        };
+        CombatResult combatResult = new(_contestantName1, WinMargin.SolidWin);
         _mockSuperheroCombatService.Setup(s => s.Fight(inputNames, "Volcano")).Returns(combatResult);
 
         // Act
-        var result = _controller.CombatNow("Volcano", _contestantName1, "", _contestantName2, "");
+        var result = _controller.CombatNow("Volcano", _contestantName1, _contestantName2, "", "");
 
         // Assert
         result.Value.Should().BeEquivalentTo(combatResult);

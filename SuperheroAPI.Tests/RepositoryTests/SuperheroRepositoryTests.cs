@@ -105,8 +105,6 @@ namespace SuperheroAPI.Tests.RepositoryTests
             expectedOutput.Add(_contestant);
             _contestant = new Contestant("Batman", "Bruce Wayne", 100, 50, 100, 47, 27, 26);
             expectedOutput.Add(_contestant);
-            _contestant = new Contestant("Batman II", "Dick Grayson", 100, 28, 88, 36, 33, 11);
-            expectedOutput.Add(_contestant);
 
             var result = _repository.GetAllNamed("Batman");
             result.Should().BeEquivalentTo(expectedOutput);

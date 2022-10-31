@@ -27,8 +27,8 @@ namespace SuperheroAPI.Services
             float eachContestantSpeed = 0.0f;
             float highestScore = 0.0f;
             string winner = "";
-            int CLOSED_CALL_VALUE = 10;
-            int SOLID_WIN_VALUE = 50;
+            int CLOSED_CALL_VALUE = 45;
+            int SOLID_WIN_VALUE = 110;
             WinMargin winMarginValue = WinMargin.CloseCall;
 
             foreach (Contestant ContestantDetails in ContestantList)

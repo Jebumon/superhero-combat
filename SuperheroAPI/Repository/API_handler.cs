@@ -15,7 +15,7 @@ namespace SuperheroAPI.Repository
 
         private string[] _contestants { get; set; }
         private string[] _inputRealNames { get; set; }
-        private Contestant _contestantObject  { get; set;}
+        private Contestant _contestantObject { get; set; } = new("", "", 0, 0, 0, 0, 0, 0);
 
         private List<Contestant> contestantsList = new List<Contestant>();
 

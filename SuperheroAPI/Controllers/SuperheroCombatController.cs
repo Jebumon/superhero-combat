@@ -21,7 +21,15 @@ namespace SuperheroAPI.Controllers
         public ActionResult<IEnumerable<Contestant>> GetAllSuperheroesNamed(string name)
         {
             var superhero = _superheroCombatService.GetAllNamed(name);
-            return superhero;
+
+            if (superhero != null)
+            {
+                return superhero;
+            }
+            else
+            {
+                return Problem("Superhero does not exist - check spelling or case!", statusCode: (int)HttpStatusCode.NotFound);
+            }
         }
 
         [HttpGet("{battlefieldName}/{contestantName1}/{contestantName2}/{contestantRealName1?}/{contestantRealName2?}")]

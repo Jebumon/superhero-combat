@@ -41,6 +41,29 @@ There are two GET endpoints:
   }
  ```
 - In the case of duplicates, the user can then see the different 'realName' of the superheroes and specify the intended one in the Combat end point.
+- Example of a duplicate:
+```
+{
+    "name": "Batman",
+    "realName": "Terry McGinnis",
+    "combat": 90,
+    "durability": 55,
+    "intelligence": 81,
+    "power": 63,
+    "speed": 29,
+    "strength": 40
+  },
+  {
+    "name": "Batman",
+    "realName": "Bruce Wayne",
+    "combat": 100,
+    "durability": 50,
+    "intelligence": 100,
+    "power": 47,
+    "speed": 27,
+    "strength": 26
+  }
+```
 
 ### 2) Combat endpoint - enter a battlefield and two superhero names (optional real names)
 - Valid battlefields are:

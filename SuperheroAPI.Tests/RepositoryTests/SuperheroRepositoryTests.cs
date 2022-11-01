@@ -94,7 +94,7 @@ namespace SuperheroAPI.Tests.RepositoryTests
             _inputContestants.Add("Batman", "");
 
             var ex = Assert.Throws<AggregateException>(() => _repository.GetContestants(_inputContestants));
-            Assert.That(ex.Message, Is.EqualTo($"One or more errors occurred. (There is more than one Batman!! Please enter their Real name)"));
+            Assert.That(ex.Message, Is.EqualTo($"One or more errors occurred. (There is more than one 'Batman'!! Please enter their Real name)"));
         }
 
         [Test]

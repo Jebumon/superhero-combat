@@ -3,7 +3,7 @@
 namespace SuperheroAPI.Repository.Exceptions
 {
     [Serializable]
-    internal class PowerStatNullException : Exception
+    public class PowerStatNullException : Exception
     {
         public PowerStatNullException()
         {

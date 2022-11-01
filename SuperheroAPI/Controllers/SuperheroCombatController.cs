@@ -20,13 +20,12 @@ namespace SuperheroAPI.Controllers
         [HttpGet("GetSuperheroes/{name}")]
         public ActionResult<IEnumerable<Contestant>> GetAllSuperheroesNamed(string name)
         {
-            var superhero = _superheroCombatService.GetAllNamed(name);
-
-            if (superhero != null)
+            try
             {
+                var superhero = _superheroCombatService.GetAllNamed(name);
                 return superhero;
             }
-            else
+            catch
             {
                 return Problem("Superhero does not exist - check spelling or case!", statusCode: (int)HttpStatusCode.NotFound);
             }

@@ -9,6 +9,7 @@ namespace SuperheroAPI.Repository
         {
             API_handler APIhandler = new API_handler(names);
             var contestantsList = APIhandler.GetContestantsList();
+
             return contestantsList;
         }
         public List<Contestant> GetAllNamed(string name)

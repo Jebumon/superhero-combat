@@ -78,7 +78,7 @@ namespace SuperheroAPI.Repository
                     catch (Exception)
                     {
                     }
-                    if (_contestantObject.Combat * _contestantObject.Durability * _contestantObject.Intelligence * _contestantObject.Power * _contestantObject.Speed * _contestantObject.Strength != 0 )
+                    if (_contestantObject.Combat * _contestantObject.Durability * _contestantObject.Intelligence * _contestantObject.Power * _contestantObject.Speed * _contestantObject.Strength != 0)
                     {
                         if (inputRealName == "GetAllNamed")
                         {
@@ -86,18 +86,18 @@ namespace SuperheroAPI.Repository
                             {
                                 break;
                             }
-                            else if(contestant == _contestantObject.Name)
+                            else if (contestant == _contestantObject.Name)
                             {
                                 this.contestantsList.Add(_contestantObject);
                                 _contestantObject = new Contestant("", "", 0, 0, 0, 0, 0, 0);
                             }
                         }
-                        if (_contestantObject.Name == contestant && _contestantObject.RealName == inputRealName || _contestantObject.Name == contestant && inputRealName == "")
+                        else if (_contestantObject.Name == contestant && _contestantObject.RealName == inputRealName || _contestantObject.Name == contestant && inputRealName == "")
                         {
                             if (this.contestantsList.Exists(x => x.Name == _contestantObject.Name))
                             {
-                                throw new DuplicateNameException($"There is more than one {_contestantObject.Name}!! Please enter their Real name");
-                               
+                                throw new DuplicateNameException(message: $"There is more than one '{_contestantObject.Name}'!! Please enter their Real name");
+
                             }
                             else if (contestant == _contestantObject.Name)
                             {
@@ -105,18 +105,34 @@ namespace SuperheroAPI.Repository
                                 _contestantObject = new Contestant("", "", 0, 0, 0, 0, 0, 0);
                             }
                         }
+                        
+                       
                     }
-                    else 
+                    else
                     {
-                        Console.WriteLine($"{tempName} / {tempRealName}  - Powerstat zero error");
-                        throw new PowerStatNullException($"{tempName} / {tempRealName}  - Powerstat zero error");
+                        if (this.contestantsList.Exists(x => x.Name == contestant))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{tempName} / {tempRealName}  - Powerstat zero error");
+                            throw new PowerStatNullException(message: $"{tempName} / {tempRealName}  - Powerstat zero error");
+                        }
                     }
+                }
+                if (this.contestantsList.Exists(x => x.Name == contestant) && this.contestantsList.Exists(x => x.RealName == inputRealName)|| inputRealName==""||inputRealName=="GetAllNamed")
+                {
+                }
+                else
+                {
+                    throw new InvalidSuperHeroNameException(message: $"Error: There is no '{contestant}' with Real Name: '{inputRealName}'!. Please enter Real Name correctly");
                 }
             }
             else
             {
-                Console.WriteLine("Error: that SuperHero not found!!");
-                throw new InvalidSuperHeroNameException(message: "Error: that SuperHero not found!!");
+                Console.WriteLine($"Error: Superhero '{contestant}' not found in Database!!");
+                throw new InvalidSuperHeroNameException(message: $"Error: Superhero '{contestant}' not found in Database!!");
             }
         }
     }

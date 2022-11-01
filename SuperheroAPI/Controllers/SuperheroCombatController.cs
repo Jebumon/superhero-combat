@@ -25,9 +25,9 @@ namespace SuperheroAPI.Controllers
                 var superhero = _superheroCombatService.GetAllNamed(name);
                 return superhero;
             }
-            catch
+            catch(Exception e)
             {
-                return Problem("Superhero does not exist - check spelling or case!", statusCode: (int)HttpStatusCode.NotFound);
+                return Problem(e.ToString(), statusCode: (int)HttpStatusCode.BadRequest);
             }
         }
 
